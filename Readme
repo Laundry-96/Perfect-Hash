@@ -1,0 +1,10 @@
+This project reads in cities from a file in "city, state abbriviation" format and stores them into a perfect hash which uses universal hash functions.
+
+*All cities will be unique, so there won't be two "Georgetown, IN"*
+
+To do:
+Create driver
+	Read files in from text file
+	Store them into the hash
+Create PrimaryHash
+Create SecondaryHash
