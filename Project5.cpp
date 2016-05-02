@@ -14,12 +14,12 @@ int main(int argc, char *argv[])
 
 	if(argc == 2)
 	{
-		filename == argv[1];
+		filename = argv[1];
 	}
 
 	else
 	{
-		cout << "Incorrect command line arguments"
+		cout << "Incorrect command line arguments" << endl;
 	}
 
 	ifstream file(filename.c_str());
@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
 
 	for(unsigned int i = 0; i < cities.size(); i++)
 	{
-		
+		cout << cities.at(i).getPlace() << endl;
+		cout << cities.at(i).getCoord() << endl;
 	}
 }
