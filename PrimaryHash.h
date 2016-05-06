@@ -9,7 +9,10 @@ using namespace std;
 class PrimaryHash
 {
 	public:
+		//CONSTRUCTOR
 		PrimaryHash(vector<City> cities);
+		//DECONSTRUCTOR
+	   ~PrimaryHash();
 
 		/*
 		 * addToHash(City city)
@@ -32,5 +35,5 @@ class PrimaryHash
 		unsigned int hash(City city);
 
 	private:
-		SecondaryHash container[];
+		SecondaryHash *container[];
 }
