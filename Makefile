@@ -1,7 +1,7 @@
 LD = $(shell which g++)
 CXX = $(shell which g++)
 CXXFLAGS = -Wall -ansi -g
-EXE = proj2
+EXE = proj5.out	
 OBJS = Project5.o City.o
 DEPS = $(addprefix .,$(OBJS:.o=.d))
 
