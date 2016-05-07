@@ -42,19 +42,11 @@ class SecondaryHash
 	     * Preconditions : Valid unique City object
 	     * Postconditions: returns the index where the City should be stored
 	     */
-		unsigned int hash(City city);
+		unsigned long hash(City city);
 
-		/*
-		 * resize()
-		 *
-		 * Resizes the index when we run out of room
-		 *
-		 * Preconditions : No more room in cities (capacity == size) when trying to insert another object
-		 * Postconditions: All items will be rehashed or let alone
-		 */
-		void resize();
-
-		City cities[];
-		unsigned int size;
-		unsigned int capacity;
+		vector<City> toInsert;
+		City *cities[];
+		unsigned long size;
+		unsigned long capacity;
+		unsigned int collisions;
 }

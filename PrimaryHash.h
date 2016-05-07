@@ -1,7 +1,10 @@
-#ifndef PERFECTHASH_H
-#define PERFECTHASH_H
+#ifndef PRIMARYHASH_H
+#define PRIMARYHASH_H
 
 #include "City.h"
+#include <cstdlib>
+#include <cmath>
+#include "SecondaryHash.h"
 #include <vector>
 
 using namespace std;
@@ -32,8 +35,20 @@ class PrimaryHash
 		 * Precondition : The place is unique
 		 * Postcondition: Returns a hash based on the algorithm used
 		 */ 
-		unsigned int hash(City city);
+		unsigned long hash(City city);
+
+		/*
+		 * numerizeString(string s)
+		 * 
+		 * Turns the string into a number by using a summing method
+		 *
+		 * Preconditions : String is unique
+		 * Postconditions: Hash based on sum and constant and stuff
+		 */
+		unsigned long numerizeString(string s);
 
 	private:
-		SecondaryHash *container[];
+		unsigned int size, prime1, prime2, c, a, b;
+		City *m_cities[];
+		SecondaryHash *m_secondary[];
 }

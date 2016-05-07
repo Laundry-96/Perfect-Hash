@@ -4,6 +4,7 @@ City::City(string place, string coord)
 {
 	m_place = place;
 	m_coord = coord;
+	m_hashValue = 0;
 }
 
 string City::getPlace()

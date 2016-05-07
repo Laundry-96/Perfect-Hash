@@ -18,8 +18,12 @@ class City
 		 */ 
 		string getPlace();
 		string getCoord();
+		unsigned long getHashValue();
+
+		void setHashValue(unsigned long hashVal);
 
 	private:
+		unsigned long m_hashValue;
 		string m_place;
 		string m_coord;
 };
