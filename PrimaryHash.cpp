@@ -1,7 +1,8 @@
 #include "PrimaryHash.h"
 
-PrimaryHash::PrimaryHash(vector<City> cities)
+PrimaryHash::PrimaryHash(vector<City*> cities)
 {
+	cout << "HELLO" << endl;
 	//Set the primes
 	prime1 = 16890581;
 	prime2 = 17027399;
@@ -15,28 +16,42 @@ PrimaryHash::PrimaryHash(vector<City> cities)
 	capacity = cities.size();
 	size = 0;
 
+	cout << "POOP" << endl;
+
 	//Instantiate m_cities
-	m_cities = new City*[cities.size()];
+	m_cities = new City*[capacity];
 
 	//Instantiate m_secondary
-	m_secondary = new SecondaryHash*[cities.size()];
+	m_secondary = new SecondaryHash*[capacity];
 
-	for(unsigned int i = 0; i < cities.size(); i++)
+	for(unsigned int i = 0; i < capacity; i++)
 	{
 		m_cities[i] = NULL;
 		m_secondary[i] = NULL;
 	}
 
+	cout << "GUC" << endl;
+
 	//Add all of the objects in cities to the container
-	for(unsigned int i = 0; i < cities.size(); i++)
+	for(unsigned int i = 0; i < capacity; i++)
 	{
+		cout << "ADDING " << cities[i]->getPlace() << endl;
 		addToHash(cities.at(i));
+	}
+
+	//Now Generate Secondary Hashes if possible
+	for(unsigned int i = 0; i < capacity; i++)
+	{
+		if(m_secondary[i] != NULL)
+		{
+			m_secondary[i]->initHash();
+		}
 	}
 }
 
 PrimaryHash::~PrimaryHash()
 {
-	for(int i = 0; i < size; i++)
+	for(unsigned int i = 0; i < capacity; i++)
 	{
 		delete m_cities[i];
 		delete m_secondary[i];
@@ -49,14 +64,14 @@ PrimaryHash::~PrimaryHash()
 
 }
 
-void PrimaryHash::addToHash(City city)
+void PrimaryHash::addToHash(City *city)
 {
 	unsigned int whereToInsert = hash(city);
 
 	//If there isn't a collision
 	if(m_cities[whereToInsert] == NULL)
 	{
-		m_cities[whereToInsert] = &city;
+		m_cities[whereToInsert] = city;
 		size++;
 	}
 
@@ -71,21 +86,21 @@ void PrimaryHash::addToHash(City city)
 
 			//Insert the original object, and the collided one
 			m_secondary[whereToInsert]->insert(m_cities[whereToInsert]);
-			m_secondary[whereToInsert]->insert(&city);
+			m_secondary[whereToInsert]->insert(city);
 		}
 
 		//If there is already a secondary slot
 		else
 		{
 			//Just insert the collided one
-			m_secondary[whereToInsert]->insert(&city);
+			m_secondary[whereToInsert]->insert(city);
 		}
 	}
 }
 
-unsigned long PrimaryHash::hash(City city)
+unsigned long PrimaryHash::hash(City *city)
 {
-	unsigned long x = numerizeString(city.getPlace());
+	unsigned long x = numerizeString(city->getPlace());
 
 	return (((a * x) + b) % prime2) % capacity;
 }

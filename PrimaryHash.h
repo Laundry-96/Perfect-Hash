@@ -4,6 +4,7 @@
 #include "City.h"
 #include <cstdlib>
 #include <cmath>
+#include <iostream>
 #include "SecondaryHash.h"
 #include <vector>
 
@@ -13,7 +14,7 @@ class PrimaryHash
 {
 	public:
 		//CONSTRUCTOR
-		PrimaryHash(vector<City> cities);
+		PrimaryHash(vector<City*> cities);
 		//DECONSTRUCTOR
 	   ~PrimaryHash();
 
@@ -25,7 +26,7 @@ class PrimaryHash
 		 * Preconditions : m_cities has enough room, and the city object is able to map
 		 * Postconditions: the City object is now in m_cities and added to the correct mapped secondary hash
 		 */
-		void addToHash(City city);
+		void addToHash(City *city);
 
 		/*
 		 * hash(City city)
@@ -35,7 +36,7 @@ class PrimaryHash
 		 * Precondition : The place is unique
 		 * Postcondition: Returns a hash based on the algorithm used
 		 */ 
-		unsigned long hash(City city);
+		unsigned long hash(City *city);
 
 		/*
 		 * numerizeString(string s)
