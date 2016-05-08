@@ -48,7 +48,9 @@ class PrimaryHash
 		unsigned long numerizeString(string s);
 
 	private:
-		unsigned int size, prime1, prime2, c, a, b;
-		City *m_cities[];
-		SecondaryHash *m_secondary[];
-}
+		unsigned int size, capacity, c, a, b, prime1, prime2;
+		City **m_cities;
+		SecondaryHash **m_secondary;
+};
+
+#endif

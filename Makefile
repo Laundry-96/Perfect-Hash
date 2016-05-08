@@ -2,7 +2,7 @@ LD = $(shell which g++)
 CXX = $(shell which g++)
 CXXFLAGS = -Wall -ansi -g
 EXE = proj5.out	
-OBJS = Project5.o City.o
+OBJS = Project5.o City.o SecondaryHash.o PrimaryHash.o
 DEPS = $(addprefix .,$(OBJS:.o=.d))
 
 $(EXE): $(DEPS) $(OBJS)

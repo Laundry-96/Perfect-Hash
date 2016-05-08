@@ -2,7 +2,7 @@
 
 PrimaryHash::PrimaryHash(vector<City> cities)
 {
-	//Set the prime
+	//Set the primes
 	prime1 = 16890581;
 	prime2 = 17027399;
 
@@ -12,15 +12,16 @@ PrimaryHash::PrimaryHash(vector<City> cities)
 	a = rand() % prime1 + 1;
 	b = rand() % prime1;
 
-	size = cities.size();
+	capacity = cities.size();
+	size = 0;
 
 	//Instantiate m_cities
-	m_cities = new City[cities.size()];
+	m_cities = new City*[cities.size()];
 
 	//Instantiate m_secondary
-	m_container = new SeconadryHash[cities.size()];
+	m_secondary = new SecondaryHash*[cities.size()];
 
-	for(unsigned int = 0; i < cities.size(); i++)
+	for(unsigned int i = 0; i < cities.size(); i++)
 	{
 		m_cities[i] = NULL;
 		m_secondary[i] = NULL;
@@ -43,25 +44,53 @@ PrimaryHash::~PrimaryHash()
 
 	delete m_cities;
 	delete m_secondary;
-	m_ = NULL;
+	m_cities = NULL;
+	m_secondary = NULL;
 
 }
 
-void addToHash(City city)
+void PrimaryHash::addToHash(City city)
 {
-	string place = city.getPlace();
+	unsigned int whereToInsert = hash(city);
 
-	container[hash(city)]->insert(city);
+	//If there isn't a collision
+	if(m_cities[whereToInsert] == NULL)
+	{
+		m_cities[whereToInsert] = &city;
+		size++;
+	}
+
+	//If there is a collision
+	else
+	{
+		//Check if there is anything in the secondary slot
+		if(m_secondary[whereToInsert] == NULL)
+		{
+			//Create a new secondary hash
+			m_secondary[whereToInsert] = new SecondaryHash();
+
+			//Insert the original object, and the collided one
+			m_secondary[whereToInsert]->insert(m_cities[whereToInsert]);
+			m_secondary[whereToInsert]->insert(&city);
+		}
+
+		//If there is already a secondary slot
+		else
+		{
+			//Just insert the collided one
+			m_secondary[whereToInsert]->insert(&city);
+		}
+	}
 }
 
-unsigned long hash(City city)
+unsigned long PrimaryHash::hash(City city)
 {
-	unsigned long x = numerizeString(city->getPlace());
+	unsigned long x = numerizeString(city.getPlace());
 
-	return (((a * x) + b) % prime2) % size;
+	return (((a * x) + b) % prime2) % capacity;
 }
 
-unsigned long numerizeString(string place)
+unsigned long PrimaryHash::numerizeString(string place)
 {
 	unsigned long sum = 0;
 	for(unsigned long i = 0; i < place.size(); i++)
