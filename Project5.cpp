@@ -1,6 +1,7 @@
 #include "City.h"
 #include <fstream>
 #include <iostream>
+#include "PrimaryHash.h"
 #include <vector>
 
 
@@ -10,7 +11,7 @@ int main(int argc, char *argv[])
 {
 
 	string filename;
-	vector<City> cities;
+	vector<City*> cities;
 
 	if(argc == 2)
 	{
@@ -20,6 +21,7 @@ int main(int argc, char *argv[])
 	else
 	{
 		cout << "Incorrect command line arguments" << endl;
+		return 1;
 	}
 
 	ifstream file(filename.c_str());
@@ -31,13 +33,15 @@ int main(int argc, char *argv[])
 
 		while(getline(file, line1) && getline(file, line2))
 		{
-			cities.push_back(City(line1, line2));
+			cities.push_back(new City(line1, line2));
 		}
 	}
 
+	PrimaryHash primeHash(cities);
+
 	for(unsigned int i = 0; i < cities.size(); i++)
 	{
-		cout << cities.at(i).getPlace() << endl;
-		cout << cities.at(i).getCoord() << endl;
+		cout << cities.at(i)->getPlace() << endl;
+		cout << cities.at(i)->getCoord() << endl;
 	}
 }
