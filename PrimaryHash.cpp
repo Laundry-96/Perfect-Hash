@@ -2,7 +2,6 @@
 
 PrimaryHash::PrimaryHash(vector<City*> cities)
 {
-	cout << "HELLO" << endl;
 	//Set the primes
 	prime1 = 16890581;
 	prime2 = 17027399;
@@ -16,8 +15,6 @@ PrimaryHash::PrimaryHash(vector<City*> cities)
 	capacity = cities.size();
 	size = 0;
 
-	cout << "POOP" << endl;
-
 	//Instantiate m_cities
 	m_cities = new City*[capacity];
 
@@ -30,12 +27,9 @@ PrimaryHash::PrimaryHash(vector<City*> cities)
 		m_secondary[i] = NULL;
 	}
 
-	cout << "GUC" << endl;
-
 	//Add all of the objects in cities to the container
 	for(unsigned int i = 0; i < capacity; i++)
 	{
-		cout << "ADDING " << cities[i]->getPlace() << endl;
 		addToHash(cities.at(i));
 	}
 
@@ -53,8 +47,21 @@ PrimaryHash::~PrimaryHash()
 {
 	for(unsigned int i = 0; i < capacity; i++)
 	{
-		delete m_cities[i];
-		delete m_secondary[i];
+		//Check if there is a secondary hash first
+		if(m_secondary[i] != NULL)
+		{
+			delete m_secondary[i];
+			m_secondary[i] = NULL;
+		}
+
+		else
+		{
+			if(m_cities[i] != NULL)
+			{
+				delete m_cities[i];
+				m_cities[i] = NULL;
+			}
+		}
 	}
 
 	delete m_cities;

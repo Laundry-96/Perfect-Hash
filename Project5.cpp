@@ -38,10 +38,4 @@ int main(int argc, char *argv[])
 	}
 
 	PrimaryHash primeHash(cities);
-
-	for(unsigned int i = 0; i < cities.size(); i++)
-	{
-		cout << cities.at(i)->getPlace() << endl;
-		cout << cities.at(i)->getCoord() << endl;
-	}
 }

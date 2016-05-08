@@ -4,6 +4,7 @@
 #include "City.h"
 #include <cstdlib>
 #include <cmath>
+#include <iostream>
 #include <vector>
 
 using namespace std;

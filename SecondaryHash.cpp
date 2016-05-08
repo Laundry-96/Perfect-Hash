@@ -21,15 +21,14 @@ SecondaryHash::SecondaryHash()
 SecondaryHash::~SecondaryHash()
 {
 	//Delete all items from the vector, not array, because we don't know where they are in the array
-	for(unsigned int i = toInsert.size(); i > 0; i--)
+	for(unsigned int i = 0; i < size; i++)
 	{
-		City *temp = toInsert[i];
-		delete temp;
-		toInsert.pop_back();
+		delete toInsert[i];
 	}
 
 	delete m_cities;
 	m_cities = NULL;
+
 }
 
 void SecondaryHash::insert(City *city)
@@ -46,6 +45,7 @@ void SecondaryHash::rehash()
 
 void SecondaryHash::initHash()
 {
+
 	size = toInsert.size();
 	capacity = size*size;
 
@@ -63,13 +63,16 @@ void SecondaryHash::initHash()
 
 void SecondaryHash::initHashTable()
 {
-	//If m_cities is instantiated, reinstantiate it
-	if(m_cities != NULL)
+	//If m_cities isn't instantiated, instantiate it
+	if(m_cities == NULL)
 	{
-		delete m_cities;
+		m_cities = new City*[capacity];
 	}
 
-	m_cities = new City*[capacity];
+	for(int i = 0; i < capacity; i++)
+	{
+		m_cities[i] = NULL;
+	}
 }
 
 bool SecondaryHash::generateHash()
