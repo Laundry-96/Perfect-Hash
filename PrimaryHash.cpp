@@ -74,7 +74,7 @@ void PrimaryHash::printStatistics()
 	cout << "number of cities: " << capacity << endl;
 
 	int citiesInPrimarySlots[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	unsigned int maxCitiesIndex = 0;
+	unsigned long maxCitiesIndex = 0, secondaryCount = 0, averageFunctionsTried = 0;
 	int hashTablesCollisions[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	
 	for(unsigned int i = 0; i < capacity; i++)
@@ -103,9 +103,15 @@ void PrimaryHash::printStatistics()
 			}
 		}
 
-		//Check for most collisions
+
+
+		//Find all information regarding secondary hash tables
 		if(m_secondary[i] != NULL)
 		{
+			//Trying index functions
+			if(m_secondary[i]->getTries() < 11)
+				hashTablesCollisions[m_secondary[i]->getTries()]++;
+
 			//What if the 0 index is NULL? We should replace it
 			//with one that actually exists
 			if(m_secondary[maxCitiesIndex] == NULL)
@@ -119,17 +125,13 @@ void PrimaryHash::printStatistics()
 				//cout << m_secondary[i]->getCollisions() << endl;
 				maxCitiesIndex = i;
 			}
-		}
 
-		if(m_secondary[i] != NULL)
-		{
-			if(m_secondary[i]->getTries() < 11)
-				hashTablesCollisions[m_secondary[i]->getTries()]++;
+			//count all secondary hash tables
+			secondaryCount++;
+			averageFunctionsTried += m_secondary[i]->getTries();
 		}
 	}
 
-
-	cout << "POOP" << endl;
 	for(unsigned int i = 0; i < 10; i++)
 	{
 		cout << "# primary slots with " << i << " cities: " << citiesInPrimarySlots[i] << endl;
@@ -141,8 +143,11 @@ void PrimaryHash::printStatistics()
 
 	for(unsigned int i = 0; i < 10; i++)
 	{
-		cout << "# secondary hash tbales trying " << i + 1 << " hash functions: " << hashTablesCollisions[i] << endl;
+		cout << "# secondary hash tables trying " << i + 1 << " hash functions: " << hashTablesCollisions[i] << endl;
 	}
+
+	cout << "number of secondary hash tables with more than one item: " << secondaryCount << endl;
+	cout << "average # of hash functions tried: " << (double)averageFunctionsTried / secondaryCount << endl;
 
 
 
