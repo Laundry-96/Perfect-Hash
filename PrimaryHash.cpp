@@ -148,14 +148,41 @@ void PrimaryHash::printStatistics()
 
 	cout << "number of secondary hash tables with more than one item: " << secondaryCount << endl;
 	cout << "average # of hash functions tried: " << (double)averageFunctionsTried / secondaryCount << endl;
+}
 
+string PrimaryHash::find(string cityToFind)
+{
+	unsigned long key = hash(cityToFind);
 
+	cout << "city details: Key = " << key << endl;
 
+	if(m_cities[key] == NULL)
+	{
+		return "n/a";
+	}
+
+	else
+	{
+		if(m_cities[key]->getPlace() == cityToFind)
+		{
+			return m_cities[key]->getPlace() + " " + m_cities[key]->getCoord();
+		}
+
+		else if(m_secondary[key] != NULL)
+		{
+			return m_secondary[key]->find(cityToFind);
+		}
+
+		else
+		{
+			return "n/a";
+		}
+	}
 }
 
 void PrimaryHash::addToHash(City *city)
 {
-	unsigned int whereToInsert = hash(city);
+	unsigned int whereToInsert = hash(city->getPlace());
 
 	//If there isn't a collision
 	if(m_cities[whereToInsert] == NULL)
@@ -187,9 +214,9 @@ void PrimaryHash::addToHash(City *city)
 	}
 }
 
-unsigned long PrimaryHash::hash(City *city)
+unsigned long PrimaryHash::hash(string place)
 {
-	unsigned long x = numerizeString(city->getPlace());
+	unsigned long x = numerizeString(place);
 
 	return (((a * x) + b) % prime2) % capacity;
 }

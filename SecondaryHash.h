@@ -31,6 +31,8 @@ class SecondaryHash
 
 		void printCities();
 
+		string find(string cityToFind);
+
 		unsigned int getSize() { return size; }
 		unsigned int getTries() { return tries + 1; }
 
@@ -66,7 +68,7 @@ class SecondaryHash
 		 * Precondition : The place is unique
 		 * Postcondition: Returns a hash based on the algorithm used
 		 */ 
-		unsigned long hash(City city);
+		unsigned long hash(string place);
 
 		/*
 		 * numerizeString(string s)

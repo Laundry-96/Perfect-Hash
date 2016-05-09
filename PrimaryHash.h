@@ -19,6 +19,8 @@ class PrimaryHash
 
 	   void printStatistics();
 
+	   string find(string cityToFind);
+
 	private:
 
 		/*
@@ -39,7 +41,7 @@ class PrimaryHash
 		 * Precondition : The place is unique
 		 * Postcondition: Returns a hash based on the algorithm used
 		 */ 
-		unsigned long hash(City *city);
+		unsigned long hash(string place);
 
 		/*
 		 * numerizeString(string s)

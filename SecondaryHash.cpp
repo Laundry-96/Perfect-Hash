@@ -61,8 +61,22 @@ void SecondaryHash::printCities()
 {
 	for(unsigned int i = 0; i < toInsert.size(); i++)
 	{
-		cout << toInsert[i]->getPlace() << " ";
-		cout << toInsert[i]->getCoord() << endl;
+		cout << toInsert[i]->toString() << endl;
+	}
+}
+
+string SecondaryHash::find(string cityToFind)
+{
+	unsigned long key = hash(cityToFind);
+
+	if(m_cities[key] == NULL || m_cities[key]->getPlace() != cityToFind)
+	{
+		return "n/a";
+	}
+
+	else
+	{
+		return m_cities[key]->toString();
 	}
 }
 
@@ -86,7 +100,7 @@ bool SecondaryHash::generateHash()
 {
 	for(unsigned int i = 0; i < size; i++)
 	{
-		unsigned long key = hash(*toInsert.at(i));
+		unsigned long key = hash(toInsert.at(i)->getPlace());
 
 		if(m_cities[key] != NULL)
 		{
@@ -103,9 +117,9 @@ bool SecondaryHash::generateHash()
 	return true;
 }
 
-unsigned long SecondaryHash::hash(City city)
+unsigned long SecondaryHash::hash(string place)
 {
-	unsigned long x = numerizeString(city.getPlace());
+	unsigned long x = numerizeString(place);
 
 	return (((a * x) + b) % prime2) % capacity;
 }

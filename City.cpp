@@ -4,7 +4,6 @@ City::City(string place, string coord)
 {
 	m_place = place;
 	m_coord = coord;
-	m_hashValue = 0;
 }
 
 string City::getPlace()
@@ -15,4 +14,9 @@ string City::getPlace()
 string City::getCoord()
 {
 	return m_coord;
+}
+
+string City::toString()
+{
+	return m_place + " (" + m_coord + ")";
 }

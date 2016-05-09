@@ -4,6 +4,7 @@
 #include "PrimaryHash.h"
 #include <vector>
 
+const string SEARCH_FOR_CITY = "Ringgold, GA";
 
 using namespace std;
 
@@ -40,4 +41,6 @@ int main(int argc, char *argv[])
 	PrimaryHash primeHash(cities);
 
 	primeHash.printStatistics();
+
+	cout << primeHash.find(SEARCH_FOR_CITY) << endl;
 }
