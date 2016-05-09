@@ -29,6 +29,11 @@ class SecondaryHash
 
 		void initHash();
 
+		void printCities();
+
+		unsigned int getSize() { return size; }
+		unsigned int getCollisions() { return collisions; }
+
 	private:
 
 		/*

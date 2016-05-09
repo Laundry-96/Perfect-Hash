@@ -3,7 +3,6 @@
 
 #include "City.h"
 #include <cstdlib>
-#include <cmath>
 #include <iostream>
 #include "SecondaryHash.h"
 #include <vector>
@@ -17,6 +16,10 @@ class PrimaryHash
 		PrimaryHash(vector<City*> cities);
 		//DECONSTRUCTOR
 	   ~PrimaryHash();
+
+	   void printStatistics();
+
+	private:
 
 		/*
 		 * addToHash(City city)
@@ -48,7 +51,6 @@ class PrimaryHash
 		 */
 		unsigned long numerizeString(string s);
 
-	private:
 		unsigned int size, capacity, c, a, b, prime1, prime2;
 		City **m_cities;
 		SecondaryHash **m_secondary;

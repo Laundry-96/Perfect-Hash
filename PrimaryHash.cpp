@@ -16,16 +16,10 @@ PrimaryHash::PrimaryHash(vector<City*> cities)
 	size = 0;
 
 	//Instantiate m_cities
-	m_cities = new City*[capacity];
+	m_cities = new City*[capacity]();
 
 	//Instantiate m_secondary
-	m_secondary = new SecondaryHash*[capacity];
-
-	for(unsigned int i = 0; i < capacity; i++)
-	{
-		m_cities[i] = NULL;
-		m_secondary[i] = NULL;
-	}
+	m_secondary = new SecondaryHash*[capacity]();
 
 	//Add all of the objects in cities to the container
 	for(unsigned int i = 0; i < capacity; i++)
@@ -64,10 +58,79 @@ PrimaryHash::~PrimaryHash()
 		}
 	}
 
-	delete m_cities;
-	delete m_secondary;
+	delete[] m_cities;
+	delete[] m_secondary;
 	m_cities = NULL;
 	m_secondary = NULL;
+}
+
+void PrimaryHash::printStatistics()
+{
+	cout << "p1: " << prime1 << endl;
+	cout << "p2: " << prime2 << endl;
+	cout << "a: " << a << endl;
+	cout << "b: " << b << endl;
+	cout << "c: " << c << endl;
+	cout << "number of cities: " << capacity << endl;
+
+	int citiesInPrimarySlots[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	unsigned int maxCitiesIndex = 0;
+	
+	for(unsigned int i = 0; i < capacity; i++)
+	{
+		//Check for cities
+		if(m_cities[i] == NULL)
+		{
+			citiesInPrimarySlots[0]++;
+		}
+
+		//There's one in the primary hash, so check secondary hash
+		else
+		{
+			//If secondary isn't null, use the secondary because 
+			//the primary city is in here
+			if(m_secondary[i] != NULL)
+			{
+				if(m_secondary[i]->getSize() < 30)
+					citiesInPrimarySlots[m_secondary[i]->getSize()]++;
+			}
+
+			//There is only one element in the primary slot
+			else
+			{
+				citiesInPrimarySlots[1]++;
+			}
+		}
+
+		//Check for most collisions
+		if(m_secondary[i] != NULL)
+		{
+			//What if the 0 index is NULL? We should replace it
+			//with one that actually exists
+			if(m_secondary[maxCitiesIndex] == NULL)
+			{
+				maxCitiesIndex = i;
+			}
+
+			else if(m_secondary[maxCitiesIndex]->getSize() < m_secondary[i]->getSize())
+			{
+				//cout <<m_secondary[maxCitiesIndex]->getCollisions() << endl;
+				//cout << m_secondary[i]->getCollisions() << endl;
+				maxCitiesIndex = i;
+			}
+		}
+	}
+
+	for(unsigned int i = 0; i < 30; i++)
+	{
+		cout << "# primary slots with " << i << " cities: " << citiesInPrimarySlots[i] << endl;
+	}
+
+	cout << "** cities in the slot with most collisions **" << endl;
+
+	m_secondary[maxCitiesIndex]->printCities();
+
+
 
 }
 

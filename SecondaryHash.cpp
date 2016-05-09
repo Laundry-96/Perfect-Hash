@@ -26,7 +26,7 @@ SecondaryHash::~SecondaryHash()
 		delete toInsert[i];
 	}
 
-	delete m_cities;
+	delete[] m_cities;
 	m_cities = NULL;
 
 }
@@ -39,6 +39,7 @@ void SecondaryHash::insert(City *city)
 void SecondaryHash::rehash()
 {
 	srand(collisions);
+	c = rand();
 	a = rand();
 	b = rand();
 }
@@ -61,13 +62,24 @@ void SecondaryHash::initHash()
 	} while(!generateHash());
 }
 
+void SecondaryHash::printCities()
+{
+	for(unsigned int i = 0; i < toInsert.size(); i++)
+	{
+		cout << toInsert[i]->getPlace() << endl;
+		cout << toInsert[i]->getCoord() << endl;
+	}
+}
+
 void SecondaryHash::initHashTable()
 {
 	//If m_cities isn't instantiated, instantiate it
-	if(m_cities == NULL)
+	if(m_cities != NULL)
 	{
-		m_cities = new City*[capacity];
+		delete[] m_cities;
 	}
+
+	m_cities = new City*[capacity]();
 
 	for(int i = 0; i < capacity; i++)
 	{
