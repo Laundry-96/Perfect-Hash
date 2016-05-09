@@ -39,9 +39,9 @@ void SecondaryHash::insert(City *city)
 void SecondaryHash::rehash()
 {
 	srand(collisions);
-	c = rand();
-	a = rand();
-	b = rand();
+	c = rand() % prime1 + 1;
+	a = rand() % prime2 + 1;
+	b = rand() % (prime2);
 }
 
 void SecondaryHash::initHash()
