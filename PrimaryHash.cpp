@@ -165,7 +165,7 @@ string PrimaryHash::find(string cityToFind)
 	{
 		if(m_cities[key]->getPlace() == cityToFind)
 		{
-			return m_cities[key]->getPlace() + " " + m_cities[key]->getCoord();
+			return m_cities[key]->toString();
 		}
 
 		else if(m_secondary[key] != NULL)
