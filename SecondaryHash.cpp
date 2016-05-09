@@ -8,14 +8,9 @@ SecondaryHash::SecondaryHash()
 	prime1 = 16890581;
 	prime2 = 17027399;
 
-	seed = 0;
-	srand(seed);
-
-	c = rand();
-	a = rand();
-	b = rand();
-
 	tries = 0;
+
+	rehash();
 }
 
 SecondaryHash::~SecondaryHash()
