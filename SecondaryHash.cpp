@@ -41,10 +41,11 @@ void SecondaryHash::rehash()
 
 void SecondaryHash::initHash()
 {
-
+	//Set size and capacity
 	size = toInsert.size();
 	capacity = size*size;
 
+	//Do we rehash or not?
 	bool firstRun = true;
 
 	do
@@ -67,7 +68,7 @@ void SecondaryHash::printCities()
 
 string SecondaryHash::find(string cityToFind)
 {
-	unsigned long key = hash(cityToFind);
+	unsigned long long key = hash(cityToFind);
 
 	if(m_cities[key] == NULL || m_cities[key]->getPlace() != cityToFind)
 	{
@@ -100,7 +101,7 @@ bool SecondaryHash::generateHash()
 {
 	for(unsigned int i = 0; i < size; i++)
 	{
-		unsigned long key = hash(toInsert.at(i)->getPlace());
+		unsigned long long key = hash(toInsert.at(i)->getPlace());
 
 		if(m_cities[key] != NULL)
 		{
@@ -117,18 +118,18 @@ bool SecondaryHash::generateHash()
 	return true;
 }
 
-unsigned long SecondaryHash::hash(string place)
+unsigned long long SecondaryHash::hash(string place)
 {
-	unsigned long x = numerizeString(place);
+	unsigned long long x = numerizeString(place);
 
 	return (((a * x) + b) % prime2) % capacity;
 }
 
-unsigned long SecondaryHash::numerizeString(string place)
+unsigned long long SecondaryHash::numerizeString(string place)
 {
-	unsigned long sum = 0;
+	unsigned long long sum = 0;
 
-	for(unsigned long i = 0; i < place.size(); i++)
+	for(unsigned long long i = 0; i < place.size(); i++)
 	{
 		sum = ((sum * c) + place.at(i)) % prime1;
 	}

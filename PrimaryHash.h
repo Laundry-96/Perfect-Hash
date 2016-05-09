@@ -17,6 +17,14 @@ class PrimaryHash
 		//DECONSTRUCTOR
 	   ~PrimaryHash();
 
+	   /*
+	    * printStatistics()
+	    *
+	    * Prints the statistics for this primary hash
+	    *
+	    * Preconditions : Everything is hashed, and good to go
+	    * Postconditions: None
+	    */
 	   void printStatistics();
 
 	   string find(string cityToFind);
@@ -41,7 +49,7 @@ class PrimaryHash
 		 * Precondition : The place is unique
 		 * Postcondition: Returns a hash based on the algorithm used
 		 */ 
-		unsigned long hash(string place);
+		unsigned long long hash(string place);
 
 		/*
 		 * numerizeString(string s)
@@ -51,7 +59,7 @@ class PrimaryHash
 		 * Preconditions : String is unique
 		 * Postconditions: Hash based on sum and constant and stuff
 		 */
-		unsigned long numerizeString(string s);
+		unsigned long long numerizeString(string s);
 
 		unsigned int size, capacity, c, a, b, prime1, prime2;
 		City **m_cities;
