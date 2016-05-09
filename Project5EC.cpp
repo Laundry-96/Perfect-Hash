@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	}
 
 	ifstream file;
-	file.open(filename, ios::in | ios::binary);
+	file.open(filename.c_str(), ios::in | ios::binary);
 
 	unsigned long len = 0;
 

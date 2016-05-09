@@ -64,8 +64,8 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	std::ifstream in(inName);
-	std::ofstream out(outName, ios::out | ios::binary);
+	std::ifstream in(inName.c_str());
+	std::ofstream out(outName.c_str(), ios::out | ios::binary);
 
 	string line;
 	string sum = "";
