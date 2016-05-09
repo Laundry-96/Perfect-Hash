@@ -143,11 +143,11 @@ void PrimaryHash::printStatistics()
 
 	for(unsigned int i = 0; i < 10; i++)
 	{
-		cout << "# secondary hash tables trying " << i << " hash functions: " << hashTablesCollisions[i] << endl;
+		cout << "# secondary hash tables trying " << i + 1 << " hash functions: " << hashTablesCollisions[i] << endl;
 	}
 
 	cout << "number of secondary hash tables with more than one item: " << secondaryCount << endl;
-	cout << "average # of hash functions tried: " << ((double)averageFunctionsTried / secondaryCount) + 1 << endl;
+	cout << "average # of hash functions tried: " << ((double)averageFunctionsTried / secondaryCount) << endl;
 }
 
 string PrimaryHash::find(string cityToFind)
