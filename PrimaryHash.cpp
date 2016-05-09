@@ -10,7 +10,7 @@ PrimaryHash::PrimaryHash(vector<City*> cities)
 	srand(0);
 	c = rand() % prime1 + 1;
 	a = rand() % prime2 + 1;
-	b = rand() % (prime2 - 1) + 1;
+	b = rand() % (prime2);
 
 	capacity = cities.size();
 	size = 0;
