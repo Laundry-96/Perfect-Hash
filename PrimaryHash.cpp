@@ -132,6 +132,8 @@ void PrimaryHash::printStatistics()
 		}
 	}
 
+	cout << "maximum collisions: " << m_secondary[maxCitiesIndex]->getSize() << endl;
+
 	for(unsigned int i = 0; i < 10; i++)
 	{
 		cout << "# primary slots with " << i << " cities: " << citiesInPrimarySlots[i] << endl;
