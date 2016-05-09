@@ -75,7 +75,7 @@ void PrimaryHash::printStatistics()
 
 	int citiesInPrimarySlots[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	unsigned long maxCitiesIndex = 0, secondaryCount = 0, averageFunctionsTried = 0;
-	int hashTablesCollisions[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	int hashTablesCollisions[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	
 	for(unsigned int i = 0; i < capacity; i++)
 	{
@@ -109,7 +109,7 @@ void PrimaryHash::printStatistics()
 		if(m_secondary[i] != NULL)
 		{
 			//Trying index functions
-			if(m_secondary[i]->getTries() < 11)
+			if(m_secondary[i]->getTries() < 12)
 				hashTablesCollisions[m_secondary[i]->getTries()]++;
 
 			//What if the 0 index is NULL? We should replace it
@@ -143,7 +143,7 @@ void PrimaryHash::printStatistics()
 
 	for(unsigned int i = 0; i < 10; i++)
 	{
-		cout << "# secondary hash tables trying " << i + 1 << " hash functions: " << hashTablesCollisions[i] << endl;
+		cout << "# secondary hash tables trying " << i + 1 << " hash functions: " << hashTablesCollisions[i + 1] << endl;
 	}
 
 	cout << "number of secondary hash tables with more than one item: " << secondaryCount << endl;
