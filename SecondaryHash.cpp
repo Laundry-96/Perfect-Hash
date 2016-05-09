@@ -66,7 +66,7 @@ void SecondaryHash::printCities()
 {
 	for(unsigned int i = 0; i < toInsert.size(); i++)
 	{
-		cout << toInsert[i]->getPlace() << endl;
+		cout << toInsert[i]->getPlace() << " ";
 		cout << toInsert[i]->getCoord() << endl;
 	}
 }
