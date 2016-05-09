@@ -32,7 +32,7 @@ class SecondaryHash
 		void printCities();
 
 		unsigned int getSize() { return size; }
-		unsigned int getCollisions() { return collisions; }
+		unsigned int getTries() { return tries + 1; }
 
 	private:
 
@@ -80,7 +80,7 @@ class SecondaryHash
 
 		vector<City*> toInsert;
 		City **m_cities;
-		unsigned int size, capacity, seed, c, a, b, collisions, prime1, prime2;
+		unsigned int size, capacity, seed, c, a, b, tries, prime1, prime2;
 };
 
 #endif

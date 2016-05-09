@@ -73,8 +73,9 @@ void PrimaryHash::printStatistics()
 	cout << "c: " << c << endl;
 	cout << "number of cities: " << capacity << endl;
 
-	int citiesInPrimarySlots[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	int citiesInPrimarySlots[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	unsigned int maxCitiesIndex = 0;
+	int hashTablesCollisions[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	
 	for(unsigned int i = 0; i < capacity; i++)
 	{
@@ -91,7 +92,7 @@ void PrimaryHash::printStatistics()
 			//the primary city is in here
 			if(m_secondary[i] != NULL)
 			{
-				if(m_secondary[i]->getSize() < 30)
+				if(m_secondary[i]->getSize() < 10)
 					citiesInPrimarySlots[m_secondary[i]->getSize()]++;
 			}
 
@@ -119,9 +120,17 @@ void PrimaryHash::printStatistics()
 				maxCitiesIndex = i;
 			}
 		}
+
+		if(m_secondary[i] != NULL)
+		{
+			if(m_secondary[i]->getTries() < 11)
+				hashTablesCollisions[m_secondary[i]->getTries()]++;
+		}
 	}
 
-	for(unsigned int i = 0; i < 30; i++)
+
+	cout << "POOP" << endl;
+	for(unsigned int i = 0; i < 10; i++)
 	{
 		cout << "# primary slots with " << i << " cities: " << citiesInPrimarySlots[i] << endl;
 	}
@@ -129,6 +138,11 @@ void PrimaryHash::printStatistics()
 	cout << "** cities in the slot with most collisions **" << endl;
 
 	m_secondary[maxCitiesIndex]->printCities();
+
+	for(unsigned int i = 0; i < 10; i++)
+	{
+		cout << "# secondary hash tbales trying " << i + 1 << " hash functions: " << hashTablesCollisions[i] << endl;
+	}
 
 
 

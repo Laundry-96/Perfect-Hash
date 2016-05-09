@@ -15,7 +15,7 @@ SecondaryHash::SecondaryHash()
 	a = rand();
 	b = rand();
 
-	collisions = 0;
+	tries = 0;
 }
 
 SecondaryHash::~SecondaryHash()
@@ -38,7 +38,7 @@ void SecondaryHash::insert(City *city)
 
 void SecondaryHash::rehash()
 {
-	srand(collisions);
+	srand(tries);
 	c = rand() % prime1 + 1;
 	a = rand() % prime2 + 1;
 	b = rand() % (prime2);
@@ -95,7 +95,7 @@ bool SecondaryHash::generateHash()
 
 		if(m_cities[key] != NULL)
 		{
-			collisions++;
+			tries++;
 			return false;
 		}
 
