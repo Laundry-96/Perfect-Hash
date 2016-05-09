@@ -9,8 +9,8 @@ PrimaryHash::PrimaryHash(vector<City*> cities)
 	//Seed random and generate c
 	srand(0);
 	c = rand() % prime1 + 1;
-	a = rand() % prime1 + 1;
-	b = rand() % prime1;
+	a = rand() % prime2 + 1;
+	b = rand() % (prime2 - 1) + 1;
 
 	capacity = cities.size();
 	size = 0;
