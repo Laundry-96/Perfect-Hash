@@ -34,7 +34,7 @@ class SecondaryHash
 		string find(string cityToFind);
 
 		unsigned int getSize() { return size; }
-		unsigned int getTries() { return tries + 1; }
+		unsigned int getTries() { return tries; }
 
 	private:
 
