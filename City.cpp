@@ -1,3 +1,9 @@
+/*
+ * Author: Austin DeLauney
+ *
+ * This class is used to hold City data, and manipulate it
+ */
+ 
 #include "City.h"
 
 City::City(string place, string coord)

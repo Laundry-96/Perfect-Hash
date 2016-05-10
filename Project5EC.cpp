@@ -1,3 +1,8 @@
+/*
+ * Author: Austin DeLauney
+ *
+ * Runs the Project5.cpp, but used a .bin file as input
+ */
 #include "City.h"
 #include <fstream>
 #include <iostream>

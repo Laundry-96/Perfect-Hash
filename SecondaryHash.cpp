@@ -1,3 +1,8 @@
+/*
+ * Author: Austin DeLauney
+ *
+ * This class is to store all of the hashes that collided from PrimaryHash
+ */
 #include "SecondaryHash.h"
 
 SecondaryHash::SecondaryHash()

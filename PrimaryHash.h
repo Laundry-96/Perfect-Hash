@@ -1,3 +1,8 @@
+/*
+ * Author: Austin DeLauney
+ *
+ * This class is the meat and potatoes of the program.
+ */
 #ifndef PRIMARYHASH_H
 #define PRIMARYHASH_H
 
