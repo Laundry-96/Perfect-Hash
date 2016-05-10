@@ -1,3 +1,8 @@
+/*
+ * Author: Austin DeLauney
+ *
+ * IS YOUR PROGRAM RUNNING??? WELL THEN YOU BETTER GO SIGKILL IT!!!
+ */
 #include "City.h"
 #include <fstream>
 #include <iostream>

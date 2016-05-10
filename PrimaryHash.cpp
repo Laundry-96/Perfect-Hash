@@ -1,3 +1,8 @@
+/*
+ * Author: Austin DeLauney
+ *
+ * This class is the meat and potatoes of the program.
+ */
 #include "PrimaryHash.h"
 
 PrimaryHash::PrimaryHash(vector<City*> cities)
@@ -154,10 +159,12 @@ void PrimaryHash::printStatistics()
 
 string PrimaryHash::find(string cityToFind)
 {
-	unsigned long key = hash(cityToFind);
+	//Get the hash
+	unsigned long long key = hash(cityToFind);
 
 	cout << "city details: Key = " << key << endl;
 
+	//See if we can find the place
 	if(m_cities[key] == NULL)
 	{
 		return "n/a";
@@ -216,17 +223,17 @@ void PrimaryHash::addToHash(City *city)
 	}
 }
 
-unsigned long PrimaryHash::hash(string place)
+unsigned long long PrimaryHash::hash(string place)
 {
-	unsigned long x = numerizeString(place);
+	unsigned long long x = numerizeString(place);
 
 	return (((a * x) + b) % prime2) % capacity;
 }
 
-unsigned long PrimaryHash::numerizeString(string place)
+unsigned long long PrimaryHash::numerizeString(string place)
 {
-	unsigned long sum = 0;
-	for(unsigned long i = 0; i < place.size(); i++)
+	unsigned long long sum = 0;
+	for(unsigned long long i = 0; i < place.size(); i++)
 	{
 		sum = ((sum * c) + place.at(i)) % prime1;
 	}

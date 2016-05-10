@@ -1,3 +1,9 @@
+/*
+ * Author: Austin DeLauney
+ *
+ * This class is used to hold City data, and manipulate it
+ */
+
 #ifndef CITY_H
 #define CITY_H
 

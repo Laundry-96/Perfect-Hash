@@ -27,10 +27,34 @@ class SecondaryHash
 		 */
 		void insert(City *city);
 
+		/*
+		 * initHash()
+		 *
+		 * Initiates the whole secondary hash
+		 *
+		 * Preconditions : toInsert is not empty
+		 * A collision free hash is done
+		 */
 		void initHash();
 
+		/*
+		 * printCities()
+		 *
+		 * Prints the cities that collided inside of this hash
+		 *
+		 * Preconditions : None
+		 * Postconditions: None
+		 */
 		void printCities();
 
+		/*
+		 * find(string cityToFind)
+		 *
+		 * Finds the object we're looking for
+		 *
+		 * Preconditions : cityToFind is not empty/NULL
+		 * Postconditions: Returns toString of object if it exists, n/a if it isn't
+		 */
 		string find(string cityToFind);
 
 		unsigned int getSize() { return size; }
@@ -48,6 +72,14 @@ class SecondaryHash
 		 */
 		bool generateHash();
 
+		/*
+		 * initHashTable()
+		 *
+		 * If Creates a new hash table
+		 *
+		 * Preconditions : None
+		 * Postconditions: None
+		 */
 		void initHashTable();
 
 		/*
@@ -68,7 +100,7 @@ class SecondaryHash
 		 * Precondition : The place is unique
 		 * Postcondition: Returns a hash based on the algorithm used
 		 */ 
-		unsigned long hash(string place);
+		unsigned long long hash(string place);
 
 		/*
 		 * numerizeString(string s)
@@ -78,11 +110,11 @@ class SecondaryHash
 		 * Preconditions : String is unique
 		 * Postconditions: Hash based on sum and constant and stuff
 		 */
-		unsigned long numerizeString(string s);
+		unsigned long long numerizeString(string s);
 
 		vector<City*> toInsert;
 		City **m_cities;
-		unsigned int size, capacity, seed, c, a, b, tries, prime1, prime2;
+		unsigned int size, capacity, c, a, b, tries, prime1, prime2;
 };
 
 #endif
